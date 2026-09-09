@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🗂️ Drive Data — Pattern Matcher Showcase</title>
-  <!-- Bebas Neue & Space Grotesk fonts -->
+  <title>Drive Folders Pattern Matcher — Brandex Drive Parser</title>
+  <meta name="description" content="A smart Google Drive folder parser that extracts, categorizes, and exports trademark case data to Google Sheets or local Excel/CSV files.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;700&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
@@ -25,24 +25,20 @@
       --shadow-lg: 8px 8px 0 #0C0C0C;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background-color: var(--bg);
       color: var(--black);
       font-family: 'Space Grotesk', sans-serif;
-      line-height: 1.5;
+      line-height: 1.55;
       padding-bottom: 60px;
     }
 
     header {
       background-color: var(--black);
       color: var(--panel);
-      padding: 15px 40px;
+      padding: 14px 32px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -54,21 +50,15 @@
 
     .logo {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
+      font-size: 26px;
       letter-spacing: 2px;
     }
-
-    .logo span.dot {
-      color: var(--accent);
-    }
-
-    .logo span.sub {
-      color: var(--teal-lt);
-    }
+    .logo span.dot { color: var(--accent); }
+    .logo span.sub { color: var(--teal-lt); }
 
     .container {
-      max-width: 1200px;
-      margin: 40px auto;
+      max-width: 1100px;
+      margin: 36px auto;
       padding: 0 20px;
     }
 
@@ -79,16 +69,16 @@
     }
 
     h1 {
-      font-size: 64px;
-      margin-bottom: 10px;
-      line-height: 0.9;
+      font-size: clamp(42px, 8vw, 64px);
+      margin-bottom: 12px;
+      line-height: 0.92;
     }
 
     h2 {
-      font-size: 38px;
-      margin-bottom: 20px;
+      font-size: 34px;
+      margin: 48px 0 18px;
       border-bottom: var(--border-thin);
-      padding-bottom: 5px;
+      padding-bottom: 6px;
       display: inline-block;
     }
 
@@ -96,20 +86,20 @@
       background-color: var(--bg-alt);
       border: var(--border);
       box-shadow: var(--shadow-lg);
-      padding: 40px;
-      margin-bottom: 40px;
+      padding: 36px 40px;
+      margin-bottom: 28px;
       position: relative;
     }
 
     .hero-stamp {
       position: absolute;
-      top: 20px;
-      right: 20px;
+      top: 18px;
+      right: 18px;
       font-family: 'Bebas Neue', sans-serif;
       background-color: var(--yellow);
       border: var(--border);
-      padding: 5px 15px;
-      font-size: 20px;
+      padding: 4px 14px;
+      font-size: 18px;
       transform: rotate(5deg);
       box-shadow: 3px 3px 0 var(--black);
     }
@@ -126,7 +116,6 @@
       margin-bottom: 8px;
       background-color: rgba(12, 12, 12, 0.08);
     }
-
     .badge.accent {
       background-color: var(--accent);
       color: var(--panel);
@@ -134,36 +123,30 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 30px;
-      margin-bottom: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 16px;
     }
 
     .card {
       background-color: var(--panel);
       border: var(--border);
       box-shadow: var(--shadow);
-      padding: 30px;
+      padding: 26px;
       transition: transform 0.15s, box-shadow 0.15s;
     }
-
     .card:hover {
       transform: translate(-3px, -3px);
       box-shadow: 8px 8px 0 var(--black);
     }
-
     .card.accent {
       border-color: var(--accent);
       box-shadow: 5px 5px 0 var(--accent);
     }
 
-    .card.accent:hover {
-      box-shadow: 8px 8px 0 var(--accent);
-    }
-
     .card-title {
-      font-size: 24px;
-      margin-bottom: 12px;
+      font-size: 22px;
+      margin-bottom: 10px;
       color: var(--accent);
     }
 
@@ -171,13 +154,11 @@
       list-style: none;
       margin-top: 10px;
     }
-
     .card li {
       margin-bottom: 8px;
       padding-left: 20px;
       position: relative;
     }
-
     .card li::before {
       content: "➔";
       position: absolute;
@@ -189,9 +170,9 @@
       background-color: var(--accent);
       color: var(--panel);
       border: var(--border-thin);
-      padding: 10px 25px;
+      padding: 10px 22px;
       font-family: 'DM Mono', monospace;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
@@ -200,44 +181,48 @@
       cursor: pointer;
       transition: transform 0.1s, box-shadow 0.1s;
     }
-
     .button:hover {
       transform: translate(-2px, -2px);
       box-shadow: 6px 6px 0 var(--black);
       background-color: var(--teal-lt);
     }
 
-    .button:active {
-      transform: translate(2px, 2px);
-      box-shadow: 0 0 0 var(--black);
-    }
-
     pre {
       background-color: var(--black);
       color: var(--teal-lt);
-      padding: 15px;
+      padding: 14px 16px;
       border: var(--border-thin);
       font-family: 'DM Mono', monospace;
       font-size: 13px;
       overflow-x: auto;
-      margin: 15px 0;
+      margin: 12px 0;
+      line-height: 1.45;
+    }
+
+    .section-card {
+      background-color: var(--panel);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      padding: 28px 32px;
+      margin-bottom: 24px;
     }
 
     footer {
       text-align: center;
-      margin-top: 60px;
+      margin-top: 50px;
       font-size: 14px;
-      color: var(--black);
     }
-
     footer a {
       color: var(--accent);
       text-decoration: none;
       font-weight: bold;
     }
+    footer a:hover { text-decoration: underline; }
 
-    footer a:hover {
-      text-decoration: underline;
+    @media (max-width: 640px) {
+      .hero { padding: 28px 20px; }
+      .hero-stamp { position: static; display: inline-block; transform: none; margin-bottom: 12px; }
+      h1 { font-size: 42px; }
     }
   </style>
 </head>
@@ -246,87 +231,125 @@
   <header>
     <div class="logo">DRIVE DATA<span class="dot">.</span><span class="sub">V2</span></div>
     <div>
-      <a href="https://github.com/0utLawzz/Drive-Data" class="button" style="padding: 6px 15px; font-size: 12px; background: var(--teal)">GitHub Repo</a>
+      <a href="https://github.com/0utLawzz/Brandex-Drive-Parser" class="button" style="padding: 6px 14px; font-size: 12px; background: var(--teal)">GitHub Repo</a>
     </div>
   </header>
 
   <div class="container">
-    
-    <!-- Hero Section -->
+
+    <!-- Hero -->
     <div class="hero">
       <div class="hero-stamp">NEO-BRUTALISM</div>
-      <h1>DRIVE FOLDERS PATTERN MATCHER</h1>
-      <p style="font-size: 18px; margin: 15px 0 25px 0; font-weight: 500;">
-        A high-performance directory auditing desktop app designed for trademark legal teams. Scans cloud-mirrored structures locally, processes regex-matching rules dynamically, and updates Google Sheets with boolean statuses.
+      <h1>DRIVE FOLDERS<br>PATTERN MATCHER</h1>
+      <p style="font-size: 17px; margin: 14px 0 22px 0; font-weight: 500; max-width: 720px;">
+        A smart Google Drive folder parser that extracts, categorizes, and exports trademark case data to Google Sheets or local Excel/CSV files.
       </p>
       <div>
-        <span class="badge accent">20 Active Rules</span>
+        <span class="badge accent">20+ Active Rules</span>
         <span class="badge">Google Sheets Sync</span>
         <span class="badge">Local Excel/CSV Export</span>
-        <span class="badge">Incremental Renames</span>
+        <span class="badge">Regex Classification</span>
+        <span class="badge">CLI + GUI</span>
       </div>
     </div>
 
-    <h2>🚀 Core Capabilities</h2>
+    <!-- Features -->
+    <h2>🚀 Features</h2>
     <div class="grid">
-      
-      <!-- Card 1 -->
       <div class="card">
-        <h3 class="card-title">🔍 Scanning Engines</h3>
-        <p>Choose the optimal scan strategy depending on the folder complexity:</p>
-        <ul>
-          <li><strong>Deep Scan (Thorough):</strong> Traverses all folder levels recursively using <code>os.walk</code> to capture loose files.</li>
-          <li><strong>Fast Scan (Strict):</strong> Audits exact 2-level depths (Clients ➔ Cases) for lightning-fast speeds over networks.</li>
-        </ul>
+        <h3 class="card-title">Multi-Mode Scanning</h3>
+        <p>Process All Clients, Consultants, Both directories, or any custom path in a single run.</p>
       </div>
-
-      <!-- Card 2 -->
       <div class="card">
-        <h3 class="card-title">⚙️ Dynamic Rules Manager</h3>
-        <p>Edit case triggers and column outputs instantly in the GUI without touching Python code:</p>
-        <ul>
-          <li>Seeded with 14 default trademark categories (TM-1, TM-48, OPPO, NTN).</li>
-          <li>Add custom matching patterns using regex strings.</li>
-          <li>Redirect rules to merge into existing columns or output to new ones.</li>
-        </ul>
+        <h3 class="card-title">Regex Classification</h3>
+        <p>13+ predefined trademark document categories (TM-1, TM-48, EXAM, ACK, OPPO, NTN…) automatically recognized without manual sorting.</p>
       </div>
-
-      <!-- Card 3 -->
       <div class="card">
-        <h3 class="card-title">📊 Smart Integrations</h3>
-        <p>Fully formatted and protected outputs:</p>
-        <ul>
-          <li><strong>Google Sheets Sync:</strong> Automatic columns check and sync + frozen headers, bold text, and column width autofitting.</li>
-          <li><strong>File Overwrite Protection:</strong> Local exports auto-increment file names (e.g. <code>all_patterns_1.xlsx</code>) instead of replacing.</li>
-        </ul>
+        <h3 class="card-title">Flexible Output</h3>
+        <p>Supports local Excel/CSV exports, Google Sheets uploads, or both simultaneously in one tool.</p>
       </div>
-
+      <div class="card">
+        <h3 class="card-title">Data Quality</h3>
+        <p>Unfiltered exports — complete and exhaustive records without duplicate filtering.</p>
+      </div>
+      <div class="card">
+        <h3 class="card-title">Interactive CLI</h3>
+        <p>Numbered text menu + fast-path options for raw directory listings or categorized exports.</p>
+      </div>
+      <div class="card">
+        <h3 class="card-title">Dynamic Rules</h3>
+        <p>Edit case triggers and column outputs without touching Python code. Add custom regex patterns on the fly.</p>
+      </div>
     </div>
 
-    <h2>💻 Setup & Run</h2>
-    <div class="card" style="margin-bottom: 40px;">
-      <h3 style="font-size: 24px; margin-bottom: 15px;">Installation</h3>
-      <p>1. Clone the repository and install dependencies:</p>
-      <pre>git clone https://github.com/0utLawzz/Drive-Data.git
-cd Drive-Data
-pip install -r requirements.txt</pre>
-      <p>2. Download Google Cloud service account keys to <code>credentials.json</code> inside the root directory.</p>
-      <p>3. Run the application via the desktop launcher or terminal:</p>
-      <pre># Windows Launcher
+    <!-- Architecture -->
+    <h2>🛠️ Architecture</h2>
+    <div class="section-card">
+      <p style="margin-bottom: 18px;"><strong>Drive-Data</strong> is structured around three logical layers:</p>
+      
+      <h3 style="font-size: 20px; margin: 16px 0 8px; color: var(--accent);">1. CLI Interface Layer</h3>
+      <p>Interactive numbered text menu. Handles directory scope (All Clients / Consultants / Both / Custom Path) and output destination (Local / Google Sheets / Both).</p>
+
+      <h3 style="font-size: 20px; margin: 16px 0 8px; color: var(--accent);">2. Directory Scanning & Pattern Matching</h3>
+      <p>Recursively traverses paths with <code>os.walk</code>. Applies predefined regex patterns to classify each file into trademark categories and builds structured records.</p>
+
+      <h3 style="font-size: 20px; margin: 16px 0 8px; color: var(--accent);">3. Export Layer</h3>
+      <ul style="margin-top: 8px; padding-left: 18px;">
+        <li><strong>Local:</strong> pandas DataFrame → openpyxl → <code>.xlsx</code> + <code>.csv</code></li>
+        <li><strong>Google Sheets:</strong> gspread + Service Account → append records with formatting</li>
+      </ul>
+    </div>
+
+    <!-- Setup -->
+    <h2>💻 Setup & Installation</h2>
+    <div class="section-card">
+      <h3 style="font-size: 20px; margin-bottom: 12px;">Requirements</h3>
+      <ul style="margin-bottom: 20px; padding-left: 18px;">
+        <li>Python 3.7+</li>
+        <li>Google Cloud Service Account with <strong>Google Sheets API</strong> and <strong>Google Drive API</strong> enabled</li>
+      </ul>
+
+      <h3 style="font-size: 20px; margin-bottom: 12px;">Step-by-Step</h3>
+      <p><strong>1. Clone the repository</strong></p>
+      <pre>git clone https://github.com/0utLawzz/Brandex-Drive-Parser.git
+cd Brandex-Drive-Parser</pre>
+
+      <p><strong>2. Install dependencies</strong></p>
+      <pre>pip install -r requirements.txt</pre>
+
+      <p><strong>3. Configure Google credentials</strong></p>
+      <p>Create a service account → enable Sheets + Drive APIs → download key as <code>credentials.json</code> → place in project root → share target Google Sheet with the service account email (Editor).</p>
+
+      <p><strong>4. Configure main.py (if needed)</strong></p>
+      <pre>SHEET_ID = "your_google_sheet_id"
+SHEET_NAME = "List"</pre>
+
+      <p><strong>5. Run</strong></p>
+      <pre># Windows
 run.bat
 
-# Python Command
+# Python
 python main.py</pre>
     </div>
 
-    <h2>📬 Get In Touch</h2>
-    <div class="grid">
-      <div class="card accent">
-        <h3 class="card-title" style="color: var(--black)">BrandEx Trademark Services</h3>
-        <p style="margin-bottom: 15px;">Need custom directory automation or Google API integrations? Let's connect.</p>
-        <p><strong>Email:</strong> net2outlawzz@gmail.com | net2tara@gmail.com</p>
-        <p><strong>Website:</strong> <a href="https://www.brandex.pk" style="color: var(--accent); font-weight: bold; text-decoration: none;">www.brandex.pk</a></p>
-      </div>
+    <!-- Troubleshooting -->
+    <h2>🔧 Troubleshooting</h2>
+    <div class="section-card">
+      <ul style="padding-left: 18px;">
+        <li><strong>gspread.exceptions.SpreadsheetNotFound</strong> — Check Sheet ID and that the sheet is shared with the service account email.</li>
+        <li><strong>FileNotFoundError: credentials.json</strong> — Ensure the JSON key file is in the project root.</li>
+        <li><strong>Permission errors on export</strong> — Make sure the local export directory is writable.</li>
+      </ul>
+    </div>
+
+    <!-- Credits -->
+    <h2>👨‍💻 Credits</h2>
+    <div class="card accent" style="max-width: 520px;">
+      <h3 class="card-title" style="color: var(--black);">OutLawZ™ (Nadeem)</h3>
+      <p style="margin-bottom: 10px;">Custom Automation Specialist</p>
+      <p><strong>Email:</strong> net2outlawzz@gmail.com | net2tara@gmail.com</p>
+      <p><strong>Website:</strong> <a href="https://www.brandex.pk" style="color: var(--accent); font-weight: bold;">www.brandex.pk</a></p>
+      <p style="margin-top: 12px;"><a href="https://github.com/0utLawzz/Brandex-Drive-Parser" class="button" style="font-size: 12px;">View on GitHub</a></p>
     </div>
 
     <footer>
